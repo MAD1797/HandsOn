@@ -32,17 +32,17 @@ public class UserLogin {
 		driver.findElement(By.id("userName")).sendKeys(string);
 		driver.findElement(By.id("password")).sendKeys(string2);
 		driver.findElement(By.name("Login")).click();
-		String check = driver.getTitle();
-		String home = "Home";
+		//String check = driver.getTitle();
+		//String home = "Home";
 		//System.out.println(check);
-		if(check.contains(home))
+		/*if(check.contains(home))
 		{
 			System.out.println("Login Successful!");
 		}
 		else
 		{
 			System.out.println("Login Failed!");
-		}
+		}*/
 	}
 	
 	@Then("Message login successfully")
@@ -51,9 +51,20 @@ public class UserLogin {
 		//String check = driver.findElement(By.xpath("//ul[@class='nav navbar-nav']")).getText();
 		//System.out.println(check);
 		//Assert.assertEquals(check, "Hi, Lalitha SignOut");
-		
-		Assert.assertEquals(driver.getTitle(), "Home");
-		driver.close();
+		String check = driver.getTitle();
+		String home = "Home";
+		if(check.contains(home))
+		{
+			Assert.assertEquals(driver.getTitle(), "Home");
+			System.out.println("Login Successful!");
+			driver.close();
+		}
+		else
+		{
+			Assert.assertEquals(driver.getTitle(), "Login");
+			System.out.println("Login Failed!");
+			driver.close();
+		}
 	}
 
 }
